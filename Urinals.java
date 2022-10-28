@@ -2,8 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Urinals {
@@ -39,6 +37,10 @@ public class Urinals {
         str.append('0');
         Integer ans = 0;
         for(int i = 0; i < str.length()-1; ++i) {
+            if(str.charAt(i) == '1' && str.charAt(i+1) == '1') {
+                result = -1;
+                return "11";
+            }
             if(prev == '0' && str.charAt(i+1) == '0') {
                 if(str.charAt(i) != '1')
                     ans++;
@@ -46,6 +48,7 @@ public class Urinals {
             }
             prev = str.charAt(i);
         }
+        str.setLength(str.length()-1);
         result = ans;
         return str.toString();
     }

@@ -69,9 +69,8 @@ public class UrinalsTest {
     @DisplayName("Check if the placement is valid")
     void checkValidPlacement() throws FileNotFoundException {
         System.out.println("====== Sai Vardhan Reddy Ainavolu == TEST THREE EXECUTED =======");
-//        urinals.getStrings();
         String s = urinals.getPlacement();
-        for(int i = 0; i < s.length(); ++i) {
+        for(int i = 0; i < s.length()-1; ++i) {
             if(s.charAt(i) == '1'&& s.charAt(i+1) == '1') {
                 assertFalse(true, "invalid number of spaces detected");
                 flag = true;
