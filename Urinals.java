@@ -5,28 +5,57 @@ import java.util.Scanner;
 
 public class Urinals {
 
-    public static ArrayList<String> getString() throws FileNotFoundException {
-//        System.out.println("Not yet implemented");
-        File file = new File("urinal.dat");
-        Scanner scanner = new Scanner(file);
-        ArrayList<String> strings = new ArrayList<>();
-        while(scanner.hasNextLine()) {
-            strings.add(scanner.nextLine());
+    private static File file = new File("urinal.dat");
+    private static Scanner scanner;
+
+    private static String string;
+
+    static {
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        return strings;
     }
 
-    Integer getSpaces() {
-        return 0;
+    //Takes input from the file
+    public static String getStrings() throws FileNotFoundException {
+//        System.out.println("Not yet implemented");
+        string = scanner.nextLine();
+        return string;
     }
 
-    Integer fillSpaces() {
-        return 0;
+    //Solves for the placement for a specific string
+    public String getPlacement() {
+//        System.out.println("Not yet implemented");
+        char prev = '0';
+        StringBuilder string = new StringBuilder(this.string);
+        string.append('0');
+        for(int i = 0; i < string.length()-1; ++i) {
+            if(prev == '0' && string.charAt(i+1) == '0') {
+                string.setCharAt(i, '1');
+            }
+            prev = string.charAt(i);
+        }
+        return string.toString();
+    }
+
+    //Iteratively solves the placements for all the strings and prints in console
+    public static void orchastrator() {
+        System.out.println("Not yet implemented");
+//        String output = null;
+//        for(int i = 0; i < inpStrings.size(); ++i) {
+//            output = getPlacement(inpStrings.get(i));
+//        }
     }
 
 
     public static void main(String args[]) throws FileNotFoundException {
-
+        File file = new File("urinal.dat");
+        scanner = new Scanner(file);
     }
 
+    public static String getString() {
+        return string;
+    }
 }
