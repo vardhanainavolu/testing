@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -10,6 +12,8 @@ public class Urinals {
     private static Scanner scanner;
 
     private static String string;
+
+    private static Integer result;
 
     static {
         try {
@@ -28,36 +32,55 @@ public class Urinals {
     }
 
     //Solves for the placement for a specific string
-    public String getPlacement() {
+    public static String getPlacement() {
 //        System.out.println("Not yet implemented");
         char prev = '0';
-        StringBuilder string = new StringBuilder(this.string);
-        string.append('0');
-        for(int i = 0; i < string.length()-1; ++i) {
-            if(prev == '0' && string.charAt(i+1) == '0') {
-                string.setCharAt(i, '1');
+        StringBuilder str = new StringBuilder(string);
+        str.append('0');
+        Integer ans = 0;
+        for(int i = 0; i < str.length()-1; ++i) {
+            if(prev == '0' && str.charAt(i+1) == '0') {
+                if(str.charAt(i) != '1')
+                    ans++;
+                str.setCharAt(i, '1');
             }
-            prev = string.charAt(i);
+            prev = str.charAt(i);
         }
-        return string.toString();
+        result = ans;
+        return str.toString();
     }
 
     //Iteratively solves the placements for all the strings and prints in console
-    public static void orchastrator() {
-        System.out.println("Not yet implemented");
-//        String output = null;
-//        for(int i = 0; i < inpStrings.size(); ++i) {
-//            output = getPlacement(inpStrings.get(i));
-//        }
-    }
-
-
-    public static void main(String args[]) throws FileNotFoundException {
+    public static void main(String args[]) throws IOException {
         File file = new File("urinal.dat");
         scanner = new Scanner(file);
+        StringBuilder fileName = new StringBuilder("rule");
+        StringBuilder swap = fileName;
+        File output = new File("rule.txt");
+        Integer enumerate = 1;
+        while(output.exists()) {
+            fileName.append(Integer.toString(enumerate));
+            fileName.append(".txt");
+            output = new File(fileName.toString());
+            fileName = new StringBuilder("rule");
+            enumerate++;
+        }
+        output.createNewFile();
+        FileWriter fileWriter = new FileWriter(output);
+        while(scanner.hasNextLine()) {
+            getStrings();
+            getPlacement();
+            System.out.println(result);
+            fileWriter.write(Integer.toString(result)+"\n");
+        }
+        fileWriter.close();
     }
 
     public static String getString() {
         return string;
+    }
+
+    public static Integer getResult() {
+        return result;
     }
 }

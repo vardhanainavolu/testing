@@ -1,8 +1,13 @@
 import org.junit.jupiter.api.*;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+import org.junit.jupiter.api.Order;
+
+import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.api.TestMethodOrder;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -61,7 +66,7 @@ public class UrinalsTest {
 
     @Test
     @Order(3)
-    @DisplayName("Check if the specific output is valid")
+    @DisplayName("Check if the placement is valid")
     void checkValidPlacement() throws FileNotFoundException {
         System.out.println("====== Sai Vardhan Reddy Ainavolu == TEST THREE EXECUTED =======");
 //        urinals.getStrings();
@@ -72,6 +77,14 @@ public class UrinalsTest {
                 flag = true;
             }
         }
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("Check if the output is valid")
+    void checkOutput() {
+        System.out.println("====== Sai Vardhan Reddy Ainavolu == TEST FOUR EXECUTED =======");
+        assertFalse(urinals.getResult() == null, "No valid result");
     }
 
 }
