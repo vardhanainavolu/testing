@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Urinals {
@@ -21,7 +22,8 @@ public class Urinals {
     //Takes input from the file
     public static String getStrings() throws FileNotFoundException {
 //        System.out.println("Not yet implemented");
-        string = scanner.nextLine();
+        if(scanner.hasNextLine())
+            string = scanner.nextLine();
         return string;
     }
 
