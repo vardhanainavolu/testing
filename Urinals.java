@@ -50,12 +50,11 @@ public class Urinals {
         return str.toString();
     }
 
-    //Iteratively solves the placements for all the strings and prints in console
+    //Iteratively solves the placements for all the strings and logs in files
     public static void main(String args[]) throws IOException {
         File file = new File("urinal.dat");
         scanner = new Scanner(file);
         StringBuilder fileName = new StringBuilder("rule");
-        StringBuilder swap = fileName;
         File output = new File("rule.txt");
         Integer enumerate = 1;
         while(output.exists()) {
@@ -67,10 +66,11 @@ public class Urinals {
         }
         output.createNewFile();
         FileWriter fileWriter = new FileWriter(output);
+        String placement;
         while(scanner.hasNextLine()) {
             getStrings();
-            getPlacement();
-            System.out.println(result);
+            placement = getPlacement();
+            System.out.println("Resulting placement of the urinals:"+placement);
             fileWriter.write(Integer.toString(result)+"\n");
         }
         fileWriter.close();
